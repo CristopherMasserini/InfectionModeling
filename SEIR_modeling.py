@@ -88,18 +88,18 @@ def step_all_SIR(iterations):
     beta = 1
     gamma = 0.1
 
-    s_all = [s_0]
-    i_all = [i_0]
-    r_all = [r_0]
+    s_all = [s_0 * 100]
+    i_all = [i_0 * 100]
+    r_all = [r_0 * 100]
 
     for _ in range(0, iterations):
         s_n = s_0 + s_step(s_0, i_0, beta)
         i_n = i_0 + i_step_SIR(i_0, s_0, beta, gamma)
         r_n = r_0 + r_step(i_n, gamma)
 
-        s_all.append(s_n)
-        i_all.append(i_n)
-        r_all.append(r_n)
+        s_all.append(s_n * 100)
+        i_all.append(i_n * 100)
+        r_all.append(r_n * 100)
 
         print(s_n+i_n+r_n)
         s_0, i_0, r_0 = s_n, i_n, r_n
@@ -115,6 +115,9 @@ def plot_SEIR(iterations):
     plt.plot(t, e_all, label="Exposed")
     plt.plot(t, i_all, label="Infected")
     plt.plot(t, r_all, label="Recovered")
+    plt.title("Infection Modeling")
+    plt.xlabel("Days")
+    plt.ylabel("Percentage of Population")
     plt.legend()
     plt.show()
 
@@ -126,6 +129,9 @@ def plot_SIR(iterations):
     plt.plot(t, s_all, label="Susceptible")
     plt.plot(t, i_all, label="Infected")
     plt.plot(t, r_all, label="Recovered")
+    plt.title("Infection Modeling")
+    plt.xlabel("Days")
+    plt.ylabel("Percentage of Population")
     plt.legend()
     plt.show()
 
